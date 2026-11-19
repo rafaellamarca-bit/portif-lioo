@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 1. TÍTULO DA ABA DO NAVEGADOR -->
+  <title>[SEU NOME] — Portfólio Dev & UI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #090a0f;
+      --bg-card: #11131c;
+      --bg-code: #0c0e14;
+      --border: #1e2233;
+      --border-hover: rgba(139, 92, 246, 0.55);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.25);
+      --cyan: #38bdf8;
+      --green: #4ade80;
+      --pink: #f472b6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      /* Fundo sólido e limpo, sem textura ou gradientes */
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(9, 10, 15, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 18px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* HERO SECTION (PÁGINA INICIAL) */
+    .hero {
+      min-height: calc(100vh - 70px);
+      padding: 110px 0 130px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 64px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 7px 16px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.2vw, 3.35rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      max-width: 530px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple), #6d28d9);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 14px 26px;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px var(--purple-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.45);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 14px 26px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--purple);
+      background: rgba(139, 92, 246, 0.08);
+    }
+
+    /* CAMPO DE FOTO / IMAGEM NO HERO */
+    .hero-photo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo-frame {
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .photo-frame:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    /* Quando você adicionar sua tag <img> dentro de .photo-frame, ela preencherá o quadro sem distorcer */
+    .photo-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      color: var(--text-muted);
+    }
+
+    .photo-placeholder-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px dashed rgba(139, 92, 246, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c4b5fd;
+    }
+
+    .photo-placeholder-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .photo-placeholder-hint {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      max-width: 240px;
+      color: var(--text-muted);
+    }
+
+    /* SEÇÕES / PÁGINAS DE CONTEÚDO BEM SEPARADAS */
+    section {
+      padding: 136px 0;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 64px;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+      padding-bottom: 150px;
+    }
+
+    .section-header {
+      margin-bottom: 52px;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--purple);
+      display: block;
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    .section-title {
+      font-size: clamp(1.85rem, 3vw, 2.3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0;
+    }
+
+    /* SOBRE & EXPERIÊNCIA */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 38px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .card p + p {
+      margin-top: 20px;
+    }
+
+    .timeline-item {
+      border-left: 2px solid var(--purple);
+      padding-left: 20px;
+      margin-bottom: 28px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    /* PROJETOS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+    }
+
+    .project-preview {
+      height: 175px;
+      background: linear-gradient(135deg, #1a1635, #0f172a);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #c4b5fd;
+      position: relative;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .project-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 0.72rem;
+      background: rgba(9, 10, 15, 0.85);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 999px;
+      color: var(--cyan);
+    }
+
+    .project-content {
+      padding: 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-content h3 {
+      font-size: 1.18rem;
+      margin-bottom: 12px;
+    }
+
+    .project-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tech-tags span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      background: rgba(139, 92, 246, 0.12);
+      color: #ddd6fe;
+      padding: 5px 11px;
+      border-radius: 6px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-links a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .project-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* HABILIDADES */
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .skill-pills span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      padding: 9px 16px;
+      border-radius: 9px;
+      color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-pills span:hover {
+      border-color: var(--purple);
+      color: #c4b5fd;
+    }
+
+    /* CONTATO */
+    .contact-box {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(17, 19, 28, 0.95));
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      border-radius: 24px;
+      padding: 72px 40px;
+      text-align: center;
+    }
+
+    .contact-box .section-tag {
+      margin-bottom: 14px;
+    }
+
+    .contact-box h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.4rem);
+      margin-bottom: 18px;
+    }
+
+    .contact-box p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 540px;
+      margin: 0 auto 38px;
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .copy-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      background: var(--bg-code);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 14px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--cyan);
+    }
+
+    footer {
+      text-align: center;
+      padding: 44px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.84rem;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding: 72px 0 96px;
+        gap: 48px;
+      }
+      section {
+        padding: 96px 0;
+      }
+      .section-header {
+        margin-bottom: 38px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-grid, .skills-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        padding: 28px;
+      }
+      .contact-box {
+        padding: 52px 24px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVEGAÇÃO -->
+  <nav>
+    <div class="nav-inner">
+      <!-- 2. SEU NOME OU APELIDO NA LOGO -->
+      <a href="#" class="logo">&lt;<span>Rafaella Marca</span> /&gt;</a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <!-- 3. STATUS ATUAL (Ex: Buscando estágio / Disponível para freelas) -->
+          [SEU STATUS ATUAL]
+        </div>
+        <h1>
+          <!-- 4. SUA FRASE DE DESTAQUE -->
+          Olá, eu sou <span class="gradient">RAFAELLA MARCA</span>.
+        </h1>
+        <p>
+          <!-- 5. SEU CARGO / ÁREA E RESUMO CURTO -->
+          Estudante de Técnico em informática para internet.
+          Desenvolvedor em formação!
+        </p>
+        <div class="hero-actions">
+          <a href="#projetos" class="btn-primary">Ver Projetos</a>
+          <!-- 6. LINK DO SEU GITHUB -->
+          <a href="https://github.com/rafaellamarca-bit" target="_blank" class="btn-secondary">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- 7. CAMPO PARA SUA FOTO DE PERFIL -->
+      <div class="hero-photo-wrapper">
+        <div class="photo-frame">
+          <!--
+            COMO ADICIONAR SUA FOTO:
+            1. Apague (ou comente) o bloco <div class="photo-placeholder">...</div> abaixo.
+            2. Descomente a linha da tag <img> logo abaixo e coloque o caminho ou link da sua imagem em src="":
+
+            <img src="sua-foto.jpg" alt="[SEU NOME]" />
+          -->
+          <div class="photo-placeholder">
+            <div class="photo-placeholder-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <span class="photo-placeholder-label">[Sua Foto Aqui]</span>
+            <span class="photo-placeholder-hint">Substitua este espaço pela sua foto de perfil usando a tag &lt;img&gt; no HTML.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE & TRAJETÓRIA -->
+    <section id="sobre">
+      <div class="section-header">
+        <span class="section-tag">// 01. sobre</span>
+        <h2 class="section-title">Sobre & Formação</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="card">
+          <h3>Quem sou eu</h3>
+          <!-- 8. SUA HISTÓRIA / APRESENTAÇÃO -->
+          <p>
+            
+          </p>
+          <p>
+            [PARÁGRAFO 2: Fale sobre seus objetivos atuais, o que está estudando no momento ou diferenciais do seu trabalho.]
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Formação & Experiência</h3>
+          <!-- 9. SUAS FORMAÇÕES OU EXPERIÊNCIAS -->
+          <div class="timeline-item">
+            <span class="timeline-date">[ANO INÍCIO] — [ANO FIM ou Atual]</span>
+            <div class="timeline-role">[NOME DO CURSO OU CARGO 1]</div>
+            <p>[NOME DA INSTITUIÇÃO OU EMPRESA — ex: SENAI / Faculdade / Empresa]</p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="timeline-date">[ANO INÍCIO] — [ANO FIM]</span>
+            <div class="timeline-role">[NOME DO CURSO OU CARGO 2]</div>
+            <p>[BREVE DESCRIÇÃO DO QUE APRENDEU OU REALIZOU]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projetos">
+      <div class="section-header">
+        <span class="section-tag">// 02. projetos_selecionados</span>
+        <h2 class="section-title">Meus Projetos</h2>
+      </div>
+
+      <div class="projects-grid">
+        <!-- 10. PROJETO 1 -->
+        <article class="project-card">
+          <div class="project-preview">
+            <span class="project-badge">[CATEGORIA — ex: Front-end]</span>
+            <!-- Para colocar imagem, apague o texto abaixo e use: <img src="caminho-da-imagem.png" alt="Projeto 1"> -->
+            [Imagem ou Print do Projeto 1]
+          </div>
+          <div class="project-content">
+            <h3>[TÍTULO DO PROJETO 1]</h3>
+            <p>[DESCRIÇÃO DO PROJETO 1: Explique o que o projeto faz e qual problema ele resolve.]</p>
+            <div class="tech-tags">
+              <span>[TECH 1]</span>
+              <span>[TECH 2]</span>
+              <span>[TECH 3]</span>
+            </div>
+            <div class="project-links">
+              <a href="[LINK DO SITE NO AR]" target="_blank">Ver projeto ↗</a>
+              <a href="[LINK DO REPOSITÓRIO GITHUB]" target="_blank">Código ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11. PROJETO 2 -->
+        <article class="project-card">
+          <div class="project-preview">
+            <span class="project-badge">[CATEGORIA — ex: UI/UX Design]</span>
+            [Imagem ou Print do Projeto 2]
+          </div>
+          <div class="project-content">
+            <h3>[TÍTULO DO PROJETO 2]</h3>
+            <p>[DESCRIÇÃO DO PROJETO 2: Explique o objetivo do projeto e o que você aprendeu nele.]</p>
+            <div class="tech-tags">
+              <span>[TECH 1]</span>
+              <span>[TECH 2]</span>
+              <span>[TECH 3]</span>
+            </div>
+            <div class="project-links">
+              <a href="[LINK DO SITE OU FIGMA]" target="_blank">Ver projeto ↗</a>
+              <a href="[LINK DO REPOSITÓRIO GITHUB]" target="_blank">Código ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 12. PROJETO 3 -->
+        <article class="project-card">
+          <div class="project-preview">
+            <span class="project-badge">[CATEGORIA — ex: Full-Stack]</span>
+            [Imagem ou Print do Projeto 3]
+          </div>
+          <div class="project-content">
+            <h3>[TÍTULO DO PROJETO 3]</h3>
+            <p>[DESCRIÇÃO DO PROJETO 3: Explique as funcionalidades principais desta aplicação.]</p>
+            <div class="tech-tags">
+              <span>[TECH 1]</span>
+              <span>[TECH 2]</span>
+              <span>[TECH 3]</span>
+            </div>
+            <div class="project-links">
+              <a href="[LINK DO SITE NO AR]" target="_blank">Ver projeto ↗</a>
+              <a href="[LINK DO REPOSITÓRIO GITHUB]" target="_blank">Código ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="habilidades">
+      <div class="section-header">
+        <span class="section-tag">// 03. stack_&_ferramentas</span>
+        <h2 class="section-title">Minhas Habilidades</h2>
+      </div>
+
+      <div class="skills-wrapper">
+        <!-- 13. GRUPO DE HABILIDADES 1 -->
+        <div class="card">
+          <h3>💻 Desenvolvimento</h3>
+          <p>Linguagens, frameworks e bancos de dados que utilizo.</p>
+          <div class="skill-pills">
+            <span>[HABILIDADE 1]</span>
+            <span>[HABILIDADE 2]</span>
+            <span>[HABILIDADE 3]</span>
+            <span>[HABILIDADE 4]</span>
+            <span>[HABILIDADE 5]</span>
+          </div>
+        </div>
+
+        <!-- 14. GRUPO DE HABILIDADES 2 -->
+        <div class="card">
+          <h3>🎨 Design & Ferramentas</h3>
+          <p>Ferramentas de prototipação, versionamento e produtividade.</p>
+          <div class="skill-pills">
+            <span>FERRAMENTA 1 —  Html</span>
+            <span>FERRAMENTA 2 —  Git / GitHub</span>
+            <span>FERRAMENTA 3 -  VS Code</span>
+            <span>FERRAMENTA 4 -  Java script</span>
+            <span>FERRAMENTA 5-   C#</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato">
+      <div class="contact-box">
+        <span class="section-tag">// 04. vamos conversar</span>
+        <h2>Entre em contato</h2>
+        <p>[MENSAGEM DE CONTATO —Estou aberta a oportunidades, freelas ou troca de ideias sobre tecnologia.</p>
+        <div class="contact-actions">
+          <!-- 15. LINK DO SEU LINKEDIN -->
+          <a href="[LINK DO SEU LINKEDIN]" target="_blank" class="btn-primary">LinkedIn ↗</a>
+          <!-- 16. SEU E-MAIL NO BOTÃO (também altere no script lá embaixo) -->
+          <button class="copy-btn" onclick="copiarEmail()" id="btnEmail">📋rafaella_marca@estudante.sesisenai.org.br</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <!-- 17. SEU NOME E ANO NO RODAPÉ -->
+    Desenvolvido por RAFAELLA MARCA • 2026
+  </footer>
+
+  <script>
+    function copiarEmail() {
+      // 18. COLOQUE SEU E-MAIL REAL AQUI DENTRO DAS ASPAS:
+      const email = "rafaella_marca@estudante.seisisemai.org.br";
+      const tempInput = document.createElement("textarea");
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      const btn = document.getElementById("btnEmail");
+      btn.textContent = "✔ E-mail copiado!";
+      setTimeout(() => {
+        btn.textContent = "📋 " + email;
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
